@@ -1,0 +1,53 @@
+import yfinance as yf
+import matplotlib.pyplot as plt
+import datetime
+
+def get_stock_data(ticker, period='1w'):
+    print("Step 1: Initiating stock data retrieval process...")
+    stock = yf.Ticker(ticker)
+    print("Step 2: Created stock ticker object...")
+    data = stock.history(period=period)
+    print("Step 3: Retrieved stock data...")
+    return data
+
+def plot_stock_data(data, ticker):
+    print("Step 4: Plotting stock data...")
+    plt.figure(figsize=(10, 5))
+    plt.plot(data.index, data['Close'], marker='o', linestyle='-')
+    plt.title(f'{ticker} Stock Prices Over the Past Week')
+    plt.xlabel('Date')
+    plt.ylabel('Close Price (USD)')
+    plt.grid(True)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
+
+def unnecessary_function():
+    print("This function does absolutely nothing useful...")
+    for i in range(10):
+        print(f"Iteration {i}: Still doing nothing...")
+    return "Nothingness"
+
+def weird_function(ticker):
+    print("Let's add some weirdness to this program...")
+    weird_variable = ticker[::-1]
+    print(f"The ticker symbol reversed is: {weird_variable}")
+    another_weird_variable = len(ticker) * 42
+    print(f"The length of the ticker symbol multiplied by 42 is: {another_weird_variable}")
+    return weird_variable, another_weird_variable
+
+def main():
+    print("Welcome to the Weird Stock Price Program!")
+    ticker = input("Enter the stock ticker symbol: ").upper()
+    period = '7d'
+    data = get_stock_data(ticker, period)
+    print("Here is the stock data:")
+    print(data)
+    plot_stock_data(data, ticker)
+    nothingness = unnecessary_function()
+    print(nothingness)
+    weird_result = weird_function(ticker)
+    print(f"Weird results: {weird_result}")
+
+if __name__ == "__main__":
+    main()
